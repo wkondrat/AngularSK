@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .selected {
+            color: orange;
+        }
+
+    </style>
+    <body>
+        <section>
+            <h2>Hello from Dialog A!</h2>
+        </section>
+        <div>
+            <table class="table table-hover" id="bookTable">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Title</th>
+                        <th>Authors</th>
+                        <th>Genre</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in data.books" data-ng-click="selectRow(item)" data-ng-class="{selected: item===selectedRow}">
+                        <td ng-bind='$index + 1'></td>
+                        <td ng-bind=item.title></td>
+                        <td ng-bind=item.author></td>
+                        <td ng-bind=item.genre></td>
+                        <td ng-bind=item.year></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-info" ng-show="editButton" ng-click="showModalEdit()">Edit</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="showModalAdd()">Add</button>
+
+        </div>
+    </body>
+</html>

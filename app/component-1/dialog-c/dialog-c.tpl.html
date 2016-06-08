@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .selected {
+            color: orange;
+        }
+    </style>
+    <body>
+        <section>
+            <h2>Hello from Dialog C!</h2>
+        </section>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Title</th>
+                        <th>Authors</th>
+                        <th>Genre</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in data.books" data-ng-click="selectGenre($index)" class="clickable-row" data-ng-class="{selected: $index===selectedGenre}">
+                        <td ng-bind='$index + 1'></td>
+                        <td ng-bind=item.title></td>
+                        <td ng-bind=item.author></td>
+                        <td ng-bind=item.genre></td>
+                        <td ng-bind=item.year></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered" ng-show="genreTable">
+              <thead>
+                  <tr>
+                      <th>Index</th>
+                      <th>Title</th>
+                      <th>Authors</th>
+                      <th>Genre</th>
+                      <th>Year</th>
+                  </tr>
+              </thead>
+                <tbody>
+                    <tr ng-repeat="item in booksByGenre">
+                        <td ng-bind='$index + 1'></td>
+                        <td ng-bind=item.title></td>
+                        <td ng-bind=item.author></td>
+                        <td ng-bind=item.genre></td>
+                        <td ng-bind=item.year></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</body>
+</html>

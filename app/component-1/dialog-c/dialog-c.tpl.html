@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in data.books" data-ng-click="selectGenre($index)" class="clickable-row" data-ng-class="{selected: $index===selectedGenre}">
+                    <tr ng-repeat="item in data.books" data-ng-click="selectGenre($index)" class="clickable-row" data-ng-class="{selected: $index===indexOfSelectedBook}">
                         <td ng-bind='$index + 1'></td>
                         <td ng-bind=item.title></td>
                         <td ng-bind=item.author></td>
@@ -31,7 +31,7 @@
                 </tbody>
             </table>
 
-            <table class="table table-bordered" ng-show="genreTable">
+            <table class="table table-bordered" ng-show="isGenreTableVisible">
               <thead>
                   <tr>
                       <th>Index</th>

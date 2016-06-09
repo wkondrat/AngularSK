@@ -19,32 +19,31 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="title">Title</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="title" ng-model="books.title" ng-minlength="1" placeholder="Title" required/>
+                            <input type="text" class="form-control" id="title" ng-model="book.title" ng-minlength="1" placeholder="Title" required/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="author">Author</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="author" ng-model="books.author" ng-minlength="1" placeholder="Author" required/>
+                            <input type="text" class="form-control" id="author" ng-model="book.author" ng-minlength="1" placeholder="Author" required/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="genre">Genre</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="genre" ng-model="books.genre" placeholder="Genre"/>
+                            <input type="text" class="form-control" id="genre" ng-model="book.genre" placeholder="Genre"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="year">Year</label>
-                        <div class='col-md-4 input-group date' id='datetimepicker1' name="date" ng-model="books.year">
-                            <input type='text' class="form-control" id="year" ng-model="books.year"/>
+                        <div class='col-md-3 input-group date' id='datetimepicker1' name="date" ng-model="book.year">
+                            <input type='text' class="form-control" id="year" ng-model="book.year"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                             <script type="text/javascript">
                                 $(function() {
                                     $('#datetimepicker1').datetimepicker({viewMode: 'years', format: 'YYYY'});
-                                    // $('#datetimepicker1').change(function() {     $(this).attr('value', $('#datetimepicker1').val()); });
                                 });
                             </script>
                         </div>

@@ -1,8 +1,8 @@
 angular.module('app.component1').controller('MyFirstController', function($scope, $http, $modal, books, myService) {
     'use strict';
-    // $scope.books = [];
-    // angular.copy(books.data, $scope.books);
 
+    $scope.isEditButtonVisible = false;
+    $scope.isGenreTableVisible = false;
     $scope.data = {
         books: []
     };
@@ -16,58 +16,55 @@ angular.module('app.component1').controller('MyFirstController', function($scope
 
     $scope.selectRow = function(book) {
         $scope.selectedRow = book;
-        $scope.editButton = "editButton";
+        $scope.isEditButtonVisible = true;
     }
 
     $scope.selectGenre = function(index) {
-        function filterByGenre(obj) {
-            if (obj.genre === $scope.pickedGenre) {
-                return true;
-            }
-        }
-        $scope.selectedGenre = index;
-        $scope.pickedGenre = $scope.data.books[index].genre;
-        $scope.booksByGenre = $scope.data.books.filter(filterByGenre);
-        $scope.genreTable = "genreTable";
+        var pickedGenre = $scope.data.books[index].genre;
+        $scope.indexOfSelectedBook = index;
+        $scope.booksByGenre = $scope.data.books.filter(function(obj) {
+          return obj.genre === pickedGenre;
+        });
+        $scope.isGenreTableVisible = true;
     }
 
-    $scope.SendData = function () {
-               // use $.param jQuery function to serialize data from JSON
-                var data = $.param({
-                    title: $scope.data.books[0].title,
-                    authors: $scope.data.books[0].author
-                });
+    $scope.SendData = function() {
+      var dataLength = $scope.data.books.length;
+      var data = {
+        title: $scope.data.books[dataLength-1].title,
+        authors: $scope.data.books[dataLength-1].author
+      };
 
-                var config = {
-                    headers : {
-                        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-                    }
-                }
+        var config = {
+            headers: {
+                'Content-Type': 'application/json;'
+            }
+        }
 
-                $http.post('http://localhost:8080/webstore/rest/books', data, config)
-                .success(function (data, status, headers, config) {
-                    $scope.PostDataResponse = data;
-                })
-                .error(function (data, status, header, config) {
-                    $scope.ResponseDetails = "Data: " + data +
-                        "<hr />status: " + status +
-                        "<hr />headers: " + header +
-                        "<hr />config: " + config;
-                });
-            };
+        $http.post('http://localhost:8080/webstore/rest/books', data, config)
+            .success(function(data, status, headers, config) {
+                $scope.PostDataResponse = data;
+            })
+            .error(function(data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+            });
+    };
 
     $scope.showModalAdd = function() {
-        $scope.opts = {
+        var opts = {
             templateUrl: 'component-1/modal-dialog/modal-dialog.tpl.html',
             controller: 'MyModalController',
             resolve: {
-                books: function() {
+                book: function() {
                     return $scope.selectedRow;
                 }
             }
         };
 
-        var modalInstance = $modal.open($scope.opts);
+        var modalInstance = $modal.open(opts);
 
         modalInstance.result.then(function(addBook) {
             $scope.data.books.push(addBook);
@@ -83,7 +80,7 @@ angular.module('app.component1').controller('MyFirstController', function($scope
             templateUrl: 'component-1/modal-dialog/modal-dialog.tpl.html',
             controller: 'MyModalController',
             resolve: {
-                books: function() {
+                book: function() {
                     return $scope.selectedRow;
                 }
             }
@@ -103,22 +100,16 @@ angular.module('app.component1').controller('MyFirstController', function($scope
         });
     };
 
-}).controller('MyModalController', function($scope, $modalInstance, books) {
+}).controller('MyModalController', function($scope, $modalInstance, book) {
     'use strict';
-
-    $scope.books = angular.copy(books);
-    $scope.selected = {
-        books: $scope.books
-    };
-
+    $scope.book =  angular.copy(book);
     $scope.ok = function() {
-        $modalInstance.close($scope.books);
+        $modalInstance.close($scope.book);
     };
-
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
-}).service("myService", function() {
+}).service('myService', function() {
     'use strict';
     var property = undefined;
 

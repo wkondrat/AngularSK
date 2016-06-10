@@ -6,5 +6,10 @@ exports.config = {
     jasmineNodeOpts: {
         showColors: true,
         isVerbose: true
-    }
+    },
+
+    specs: ['e2e/dialogCommunication.e2e-spec.js',
+            'e2e/modal-dialog.e2e-spec.js',
+            'e2e/dialog-d.e2e-spec.js'
+        ]
 };

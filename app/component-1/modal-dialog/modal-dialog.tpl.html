@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="year">Year</label>
-                        <div class='col-md-3 input-group date' id='datetimepicker1' name="date" ng-model="book.year">
+                        <div class='col-md-3 input-group date' id='datetimepicker1' name="date">
                             <input type='text' class="form-control" id="year" ng-model="book.year"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button class="btn btn-primary" ng-disabled="addBookForm.$invalid" data-ng-click="ok()">OK</button>
+                    <button class="btn btn-primary" ng-disabled="addBookForm.$invalid" value="ok" data-ng-click="ok()">OK</button>
                     <button class="btn btn-primary" data-ng-click="cancel()">Cancel</button>
                 </div>
             </div>
